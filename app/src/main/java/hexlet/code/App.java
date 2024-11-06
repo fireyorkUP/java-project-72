@@ -26,8 +26,8 @@ public class App {
         return app;
     }
 
-    public static int getPort() {
-        var port = System.getenv().getOrDefault("DB_PORT", "7070");
+    private static int getPort() {
+        String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.valueOf(port);
     }
 
