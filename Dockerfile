@@ -1,9 +1,11 @@
-FROM gradle:8.5-jdk21
+FROM gradle:8.5.0-jdk21
 
 WORKDIR /app
 
 COPY /app .
 
-RUN gradle installDist
+RUN chmod +x gradlew
+
+RUN ./gradlew installDist
 
 CMD ./build/install/app/bin/app
