@@ -14,11 +14,15 @@ public class App {
     }
 
     public static Javalin getApp() throws IOException, SQLException {
+        String jdbcDatabaseUrl = System.getenv("JDBC_DATABASE_URL");
+
+        if (jdbcDatabaseUrl == null || jdbcDatabaseUrl.isEmpty()) {
+            jdbcDatabaseUrl = "jdbc:h2:mem:hexlet;DB_CLOSE_DELAY=-1;";
+        }
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte());
         });
-
         app.get("/", ctx -> ctx.result("Hello World!"));
 
         log.atError();
