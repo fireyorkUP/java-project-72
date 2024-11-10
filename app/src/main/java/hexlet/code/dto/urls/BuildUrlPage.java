@@ -1,5 +1,6 @@
-package hexlet.code.dto.url;
+package hexlet.code.dto.urls;
 
+import hexlet.code.dto.BasePage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BuildUrlPage extends BasePage {
-
     private String name;
     private LocalDateTime createdAt;
     private Exception errors;

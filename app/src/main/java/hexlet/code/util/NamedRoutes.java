@@ -2,7 +2,6 @@ package hexlet.code.util;
 
 
 public class NamedRoutes {
-
     public static String rootPath() {
         return "/";
     }
@@ -19,7 +18,7 @@ public class NamedRoutes {
         return "/urls/" + id;
     }
 
-    public static String checksPath(String id) {
-        return urlPath(id) + "/checks";
+    public static String check(String id) {
+        return "urls/" + id + "/checks";
     }
 }
