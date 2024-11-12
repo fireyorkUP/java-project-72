@@ -26,15 +26,23 @@ public class App {
         app.start(getPort());
     }
 
+
+    static String jdbcUrlCurrent = getJdbcDatabaseUrl();
+    private static final String JDBC_URL_H2 = "jdbc:h2:mem:hexlet";
+    public static String getJdbcDatabaseUrl() {
+        return System.getenv().getOrDefault("JDBC_DATABASE_URL", JDBC_URL_H2);
+    }
+
+
     public static Javalin getApp() throws IOException, SQLException {
         var hikariConfig = new HikariConfig();
-        String jdbcDatabaseUrl = System.getenv("JDBC_DATABASE_URL");
+        hikariConfig.setJdbcUrl(jdbcUrlCurrent);
 
-        if (jdbcDatabaseUrl == null || jdbcDatabaseUrl.isEmpty()) {
-            jdbcDatabaseUrl = "jdbc:h2:mem:hexlet;";
-        }
+        var dataSource = new HikariDataSource(hikariConfig);
 
-        hikariConfig.setJdbcUrl(jdbcDatabaseUrl);
+        var inputStream = App.class.getClassLoader().getResourceAsStream("schema.sql");
+        var reader = new BufferedReader(new InputStreamReader(inputStream));
+        var sql = reader.lines().collect(Collectors.joining("\n"));
 
         var dataSource = new HikariDataSource(hikariConfig);
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
