@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UrlRepository extends BaseRepository {
 
     public static void save(Url url) throws SQLException {
-        String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
+        var sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
@@ -21,9 +21,9 @@ public class UrlRepository extends BaseRepository {
             var generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 url.setId(generatedKeys.getLong(1));
-                url.setCreatedAt(new Timestamp(System.currentTimeMillis())/*generatedKeys.getTimestamp(2)*/);
+                url.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             } else {
-                throw new SQLException("DB have not returned an id or createdAt after saving an entity");
+                throw new SQLException("No id or createdAt");
             }
         }
     }
@@ -37,9 +37,12 @@ public class UrlRepository extends BaseRepository {
             if (resultSet.next()) {
                 var name = resultSet.getString("name");
                 var createdAt = resultSet.getTimestamp("created_at");
+                var resultId = resultSet.getLong("id");
                 var url = new Url(name);
                 url.setCreatedAt(createdAt);
                 url.setId(id);
+                List<UrlCheck> checks = UrlCheckRepository.findByUrl(resultId);
+                url.setChecks(checks);
                 return Optional.of(url);
             }
             return Optional.empty();
@@ -47,7 +50,7 @@ public class UrlRepository extends BaseRepository {
     }
 
     public static Optional<Url> findByName(String name) throws SQLException {
-        String sql = "SELECT * FROM urls WHERE name = ?";
+        var sql = "SELECT * FROM urls WHERE name = ?";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
@@ -66,7 +69,7 @@ public class UrlRepository extends BaseRepository {
     }
 
     public static List<Url> getEntities() throws SQLException {
-        String sql = "SELECT * FROM urls ORDER BY created_at ASC";
+        var sql = "SELECT * FROM urls ORDER BY created_at ASC";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql)) {
             var resultSet = preparedStatement.executeQuery();

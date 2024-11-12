@@ -10,7 +10,6 @@ import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
-import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,11 +28,10 @@ public class App {
 
     public static Javalin getApp() throws IOException, SQLException {
         var hikariConfig = new HikariConfig();
-
         String jdbcDatabaseUrl = System.getenv("JDBC_DATABASE_URL");
 
         if (jdbcDatabaseUrl == null || jdbcDatabaseUrl.isEmpty()) {
-            jdbcDatabaseUrl = "jdbc:h2:mem:hexlet;DB_CLOSE_DELAY=-1;";
+            jdbcDatabaseUrl = "jdbc:h2:mem:hexlet;";
         }
 
         hikariConfig.setJdbcUrl(jdbcDatabaseUrl);
@@ -42,7 +40,6 @@ public class App {
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
         var sql = new BufferedReader(new InputStreamReader(url))
                 .lines().collect(Collectors.joining("\n"));
-
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
@@ -57,9 +54,9 @@ public class App {
         });
 
         app.get(NamedRoutes.rootPath(), RootController::index);
+        app.get(NamedRoutes.urlsPath(), UrlController::show);
         app.post(NamedRoutes.urlsPath(), UrlController::add);
-        app.get(NamedRoutes.urlsPath(), UrlController::urlList);
-        app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
+        app.get(NamedRoutes.urlPath("{id}"), UrlController::showCheck);
         app.post(NamedRoutes.check("{id}"), UrlController::doCheck);
 
         return app;
