@@ -25,7 +25,7 @@ import java.util.Optional;
 import static io.javalin.rendering.template.TemplateUtil.model;
 
 public class UrlController {
-    public static void add(Context ctx) throws SQLException, IllegalArgumentException{
+    public static void add(Context ctx) throws SQLException, IllegalArgumentException {
         var input = ctx.formParam("url");
         try {
             URL absoluteUrl = new URI(input).toURL();
@@ -77,8 +77,8 @@ public class UrlController {
             Document document = Jsoup.parse(responseBody);
             String title = document.title();
             String firstH1 = document.select("h1").isEmpty() ? "" : document.select("h1").text();
-            String description = document.select("meta[name=description]").isEmpty() ? "" :
-                    document.select("meta[name=description]").attr("content");
+            String description = document.select("meta[name=description]").isEmpty() ? ""
+                    : document.select("meta[name=description]").attr("content");
 
             UrlCheck urlCheck = new UrlCheck();
             urlCheck.setStatusCode(statusCode);

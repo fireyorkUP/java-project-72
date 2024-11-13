@@ -5,7 +5,9 @@ import hexlet.code.model.UrlCheck;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UrlCheckRepository extends BaseRepository {
 
@@ -39,16 +41,16 @@ public class UrlCheckRepository extends BaseRepository {
             preparedStatement.setLong(1, id);
             var resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                var StatusCode = resultSet.getInt("status_code");
-                var Title = resultSet.getString("title");
-                var H1 = resultSet.getString("h1");
-                var Description = resultSet.getString("description");
-                var CreatedAt = resultSet.getTimestamp("created_at");
-                var Id = resultSet.getLong("id");
-                var UrlId = resultSet.getLong("url_id");
-                UrlCheck urlCheck = new UrlCheck(StatusCode, Title, H1, Description, UrlId);
-                urlCheck.setId(Id);
-                urlCheck.setCreatedAt(CreatedAt);
+                var statusCode = resultSet.getInt("status_code");
+                var title = resultSet.getString("title");
+                var h1 = resultSet.getString("h1");
+                var description = resultSet.getString("description");
+                var createdAt = resultSet.getTimestamp("created_at");
+                var nowId = resultSet.getLong("id");
+                var urlId = resultSet.getLong("url_id");
+                UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
+                urlCheck.setId(nowId);
+                urlCheck.setCreatedAt(createdAt);
                 listOfChecks.add(urlCheck);
             }
             return listOfChecks;
