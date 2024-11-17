@@ -4,3 +4,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/588d6032fdf34ac34851/maintainability)](https://codeclimate.com/github/fireyorkUP/java-project-72/maintainability)
 
 [![Java CI](https://github.com/fireyorkUP/java-project-72/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/fireyorkUP/java-project-72/actions/workflows/github-actions-demo.yml)
+
+
+сайт, который анализирует указанные страницы на SEO пригодность.
