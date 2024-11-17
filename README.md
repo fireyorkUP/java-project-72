@@ -3,6 +3,8 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/588d6032fdf34ac34851/maintainability)](https://codeclimate.com/github/fireyorkUP/java-project-72/maintainability)
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/588d6032fdf34ac34851/test_coverage)](https://codeclimate.com/github/fireyorkUP/java-project-72/test_coverage)
+
 [![Java CI](https://github.com/fireyorkUP/java-project-72/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/fireyorkUP/java-project-72/actions/workflows/github-actions-demo.yml)
 
 Полноценный веб-сайт на базе фреймворка Javalin.
