@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
-
 import io.javalin.rendering.template.JavalinJte;
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,11 +64,6 @@ public class App {
     private static int getPort() {
         String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.valueOf(port);
-    }
-
-    private static final String JDBC_URL_H2 = "jdbc:h2:mem:hexlet";
-    public static String getJdbcDatabaseUrl() {
-        return System.getenv().getOrDefault("JDBC_DATABASE_URL", JDBC_URL_H2);
     }
 
     private static TemplateEngine createTemplateEngine() {
