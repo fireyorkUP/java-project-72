@@ -31,7 +31,9 @@
             </div>
         </nav>
         <main class="flex-grow-1">
-            ${content}
+            <section>
+                ${content}
+            </section>
         </main>
         <footer class="footer border-top py-3 mt-5 bg-light">
             <div class="container-xl">

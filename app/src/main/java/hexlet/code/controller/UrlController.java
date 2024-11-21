@@ -1,5 +1,6 @@
 package hexlet.code.controller;
 
+import hexlet.code.dto.BasePage;
 import hexlet.code.dto.urls.UrlPage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
@@ -40,9 +41,11 @@ public class UrlController {
                 setFlashMessage(ctx, "Страница уже существует", "alert-info");
             }
             ctx.redirect(NamedRoutes.urlsPath());
-        } catch (URISyntaxException | IllegalArgumentException | IOException e) {
-            setFlashMessage(ctx, "Некорректный формат URL", "alert-danger");
-            ctx.redirect(NamedRoutes.rootPath());
+        } catch (Exception e) {
+            BasePage page = new BasePage();
+            page.setFlash("Некорректный формат URL");
+            page.setFlashType("alert-danger");
+            ctx.render("index.jte", model("page", page));
         }
     }
 
