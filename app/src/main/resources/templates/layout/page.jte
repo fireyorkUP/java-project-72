@@ -35,9 +35,11 @@
                 ${content}
             </section>
         </main>
-        <footer class="footer border-top py-3 mt-5 bg-light">
+        <footer class="footer mt-auto py-3 bg-light">
             <div class="container-xl">
-                <div class="text-center">created by fireyorkUP</div>
+                <div class="text-center">
+                    <p>created by <a href="https://github.com/fireyorkUP" target="_blank">fireyorkUP</a></p>
+                </div>
             </div>
         </footer>
     </body>

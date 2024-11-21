@@ -44,30 +44,16 @@ content = @`
                     </tr>
                 </thead>
                 <tbody>
-                    <table class="table mt-3">
-                        <thead>
-                            <tr>
-                                <th class="col">ID</th>
-                                <th class="col">Status code</th>
-                                <th class="col">Title</th>
-                                <th class="col">H1</th>
-                                <th class="col">Description</th>
-                                <th class="col">Check date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @for(var urlCheck: page.getUrl().getChecks())
-                                    <tr>
-                                        <td>${urlCheck.getId()}</td>
-                                        <td>${urlCheck.getStatusCode()}</td>
-                                        <td>${urlCheck.getTitle()}</td>
-                                        <td>${urlCheck.getH1()}</td>
-                                        <td>${urlCheck.getDescription()}</td>
-                                        <td>${urlCheck.getCreatedAt().toString()}</td>
-                                    </tr>
-                                @endfor
-                                </tbody>
-                            </table>
+                @for(var urlCheck: page.getUrl().getChecks())
+                    <tr>
+                        <td>${urlCheck.getId()}</td>
+                        <td>${urlCheck.getStatusCode()}</td>
+                        <td>${urlCheck.getTitle()}</td>
+                        <td>${urlCheck.getH1()}</td>
+                        <td>${urlCheck.getDescription()}</td>
+                        <td>${urlCheck.getCreatedAt().toString()}</td>
+                        </tr>
+                    @endfor
                 </tbody>
             </table>
         </div>
