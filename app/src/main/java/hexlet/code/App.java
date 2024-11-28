@@ -36,7 +36,9 @@ public class App {
         hikariConfig.setJdbcUrl(jdbcDatabaseUrl);
 
         var dataSource = new HikariDataSource(hikariConfig);
-        String sql = Files.readString(Paths.get("./src/main/resources/schema.sql"));
+        var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
+        var sql = new BufferedReader(new InputStreamReader(url))
+                .lines().collect(Collectors.joining("\n"));
         log.info(sql);
         try (var connection = dataSource.getConnection();
              var statement = connection.createStatement()) {
