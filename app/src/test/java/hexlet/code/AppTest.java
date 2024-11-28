@@ -33,7 +33,6 @@ public final class AppTest {
         String htmlFile = Files.readString(path);
         MockResponse mockedResponse = new MockResponse().setBody(htmlFile).setResponseCode(200);
         mockServer.enqueue(mockedResponse);
-        mockServer.start();
     }
 
     @AfterAll
